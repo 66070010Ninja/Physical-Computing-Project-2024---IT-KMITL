@@ -4,10 +4,10 @@
 
 // delay (1000 = 1 sec)
 const int time = 10;
-const int time_click = 500;
+const int time_click = 100;
 
 // Mouse
-const int move_mouse = 20;
+const int move_mouse = 10;
 
 // JoyStick
 const int VRx = A1;
@@ -25,13 +25,13 @@ const char Right = 'd';
 
 const char R_A = 'e';
 const char R_B = 'f';
-const char R_C = 'z';
-const char R_D = 'x';
+const char R_C = 'q';
+const char R_D = 'c';
 
 const char L_A = 'l';
 const char L_B = 'k';
-const char L_C = 'o';
-const char L_D = 'i';
+const char L_C = 'b';
+const char L_D = 't';
 
 // Button
 const int B_RA = 2;
@@ -86,27 +86,60 @@ void loop() {
   } else if (xValueR > 600) {
     Keyboard.write(Right);
     delay(time);
-  }
-  if (yValueR < 400) {
+  } else if (yValueR < 400) {
     Keyboard.write(Down);
     delay(time);
   } else if (yValueR > 600) {
     Keyboard.write(Up);
+    delay(time);
+  } else if (xValueR < 400 && yValueR < 400) {
+    Keyboard.write(Lift);
+    Keyboard.write(Down);
+    delay(time);
+  } else if (xValueR < 400 && yValueR > 600) {
+    Keyboard.write(Lift);
+    Keyboard.write(Up);
+    delay(time);
+  } else if (xValueR > 600 && yValueR < 400) {
+    Keyboard.write(Right);
+    Keyboard.write(Down);
+    delay(time);
+  } else if (xValueR > 600 && yValueR > 600) {
+    Keyboard.write(Right);
+    Keyboard.write(Down);
     delay(time);
   }
 
   if (xValueL < 400) {
     Mouse.move(-move_mouse, 0);
     delay(time);
-  } else if (xValueL > 600) {
+  }
+  if (xValueL > 600) {
     Mouse.move(move_mouse, 0);
     delay(time);
   }
   if (yValueL < 400) {
     Mouse.move(0, move_mouse);
     delay(time);
-  } else if (yValueL > 600) {
+  }
+  if (yValueL > 600) {
     Mouse.move(0, -move_mouse);
+    delay(time);
+  }
+  if (xValueL < 400 && yValueL < 400) {
+    Mouse.move(-move_mouse, move_mouse);
+    delay(time);
+  }
+  if (xValueL < 400 && yValueL > 600) {
+    Mouse.move(-move_mouse, -move_mouse);
+    delay(time);
+  }
+  if (xValueL > 600 && yValueL < 400) {
+    Mouse.move(move_mouse, move_mouse);
+    delay(time);
+  }
+  if (xValueL > 600 && yValueL > 600) {
+    Mouse.move(move_mouse, -move_mouse);
     delay(time);
   }
 
@@ -131,11 +164,13 @@ void loop() {
     delay(time_click);
   }
   if (Button_LA == 0) {
-    Keyboard.write(L_A);
+    Mouse.click(MOUSE_RIGHT);
+    // Keyboard.write(L_A);
     delay(time_click);
   }
   if (Button_LB == 0) {
-    Keyboard.write(L_B);
+    Mouse.click(MOUSE_LEFT);
+    // Keyboard.write(L_B);
     delay(time_click);
   }
   if (Button_LC == 0) {
