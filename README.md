@@ -1,7 +1,7 @@
 # Physical Computing Project - ITKMITL
 Project Computing Project 2024 - ITKMITL
 
-## Introduction Project
+## Introduction Project ** JoyCon **
 แก้ปัญหาคนอยากเล่นเกมโดยใช้ joy controller บน PC สำหรับบางเกมนั้นการเล่นด้วย joy controller มันทั้งสะดวกกว่า และได้รับประสบการณ์การเล่นที่ดีกว่าการใช้คีย์บอร์ดและเมาส์ โดยในแต่ละเกมเองก็มีการใช้ปุ่มที่แตกต่างกัน จึงให้ผู้เล่นสามารถตั้งค่าแต่ละปุ่มได้ ตามที่ผู้เล่นต้องการได้
 
 ## สมาชิกกลุ่ม
