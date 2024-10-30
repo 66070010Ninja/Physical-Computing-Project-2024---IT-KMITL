@@ -3,16 +3,255 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="style.css" rel="stylesheet">
+    <title>Physical-Computing-Project-2024---IT-KMITL</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>tailwind.config = {theme: {extend: {colors: {primary: {DEFAULT: '#3182ce',foreground: '#ffffff',},secondary: {DEFAULT: '#d53f8c',foreground: '#ffffff',},},},},}</script>
 </head>
-<body>
-    <div class="m-5 p-5">
-        <h1 class="text-center text-5xl text-red-500">วัตถุประสงค์</h1>
+<body class="bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 min-h-screen">
+    <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
+        <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
+            <div class="p-6">
+                <img src="JoyCon Poster.png" alt="JoyCon Project Logo" class="max-h-48 mx-auto object-contain">
+            </div>
+            <div class="flex bg-gray-700 border-b border-gray-600">
+                <button class="tab active px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="abstract">บทคัดย่อ</button>
+                <button class="tab px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="code">Source Code</button>
+                <button class="tab px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="demo">Demo</button>
+            </div>
+            <div id="abstract" class="tab-content active p-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">บทคัดย่อ</h2>
+                <p class="text-gray-300 leading-relaxed mb-8">ในปัจจุบันมีการออกแบบจอยคอนโทรลเลอร์หลายประเภทให้ผู้ใช้เลือกตามความต้องการ เช่น จอยคอนโทรลเลอร์ PlayStation, Xbox และจอยคอนโทรลเลอร์สำหรับเกมเฉพาะต่างๆ โครงการนี้มีวัตถุประสงค์ในการสร้างจอยคอนโทรลเลอร์ที่ปรับให้เหมาะกับการเล่นเกมหรือการใช้งานตามความถนัดของผู้ใช้แต่ละราย รวมถึงศึกษาและเข้าใจหลักการทำงานของจอยคอนโทรลเลอร์เพื่อให้สามารถนำไปประยุกต์ใช้ได้ในลักษณะที่เหมาะสมกับผู้ใช้งานแต่ละคน</p>
+            </div>
+            <div id="code" class="tab-content hidden p-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Source Code</h2>
+                <pre class="bg-gray-700 p-4 rounded-lg overflow-x-auto text-sm">
+                    <code class="language-cpp">
+#include &lt;Keyboard.h&gt;
+#include &lt;Mouse.h&gt;
+
+// delay (1000 = 1 sec)
+const int time = 10;
+const int time_click = 100;
+
+// Mouse
+const int move_mouse = 10;
+
+// JoyStick
+const int VRx = A1;
+const int VRy = A0;
+const int VLx = A3;
+const int VLy = A2;
+const int SWR = 2;
+const int SWL = 3;
+
+// KeyBoard
+const char Up = 'w';
+const char Down = 's';
+const char Lift = 'a';
+const char Right = 'd';
+
+const char R_A = 'e';
+const char R_B = 'f';
+const char R_C = 'q';
+const char R_D = 'c';
+
+const char L_A = 'l';
+const char L_B = 'k';
+const char L_C = 'b';
+const char L_D = 't';
+
+// Button
+const int B_RA = 2;
+const int B_RB = 3;
+const int B_RC = 4;
+const int B_RD = 5;
+
+const int B_LA = 6;
+const int B_LB = 7;
+const int B_LC = 8;
+const int B_LD = 9;
+
+void setup() {
+    Serial.begin(9600);
+    Keyboard.begin();
+    Mouse.begin();
+
+    pinMode(SWR, INPUT_PULLUP);
+    pinMode(SWL, INPUT_PULLUP);
+
+    pinMode(B_RA, INPUT_PULLUP);
+    pinMode(B_RB, INPUT_PULLUP);
+    pinMode(B_RC, INPUT_PULLUP);
+    pinMode(B_RD, INPUT_PULLUP);
+
+    pinMode(B_LA, INPUT_PULLUP);
+    pinMode(B_LB, INPUT_PULLUP);
+    pinMode(B_LC, INPUT_PULLUP);
+    pinMode(B_LD, INPUT_PULLUP);
+}
+
+void loop() {
+
+    int Button_RA = digitalRead(B_RA);
+    int Button_RB = digitalRead(B_RB);
+    int Button_RC = digitalRead(B_RC);
+    int Button_RD = digitalRead(B_RD);
+
+    int Button_LA = digitalRead(B_LA);
+    int Button_LB = digitalRead(B_LB);
+    int Button_LC = digitalRead(B_LC);
+    int Button_LD = digitalRead(B_LD);
+
+    int xValueR = analogRead(VRx);
+    int yValueR = analogRead(VRy);
+    int xValueL = analogRead(VLx);
+    int yValueL = analogRead(VLy);
+
+    if (xValueR < 400) {
+        Keyboard.write(Lift);
+        delay(time);
+    } else if (xValueR > 600) {
+        Keyboard.write(Right);
+        delay(time);
+    } else if (yValueR < 400) {
+        Keyboard.write(Down);
+        delay(time);
+    } else if (yValueR > 600) {
+        Keyboard.write(Up);
+        delay(time);
+    } else if (xValueR < 400 && yValueR < 400) {
+        Keyboard.write(Lift);
+        Keyboard.write(Down);
+        delay(time);
+    } else if (xValueR < 400 && yValueR > 600) {
+        Keyboard.write(Lift);
+        Keyboard.write(Up);
+        delay(time);
+    } else if (xValueR > 600 && yValueR < 400) {
+        Keyboard.write(Right);
+        Keyboard.write(Down);
+        delay(time);
+    } else if (xValueR > 600 && yValueR > 600) {
+        Keyboard.write(Right);
+        Keyboard.write(Down);
+        delay(time);
+    }
+
+    if (xValueL < 400) {
+        Mouse.move(-move_mouse, 0);
+        delay(time);
+    }
+    if (xValueL > 600) {
+        Mouse.move(move_mouse, 0);
+        delay(time);
+    }
+    if (yValueL < 400) {
+        Mouse.move(0, move_mouse);
+        delay(time);
+    }
+    if (yValueL > 600) {
+        Mouse.move(0, -move_mouse);
+        delay(time);
+    }
+    if (xValueL < 400 && yValueL < 400) {
+        Mouse.move(-move_mouse, move_mouse);
+        delay(time);
+    }
+    if (xValueL < 400 && yValueL > 600) {
+        Mouse.move(-move_mouse, -move_mouse);
+        delay(time);
+    }
+    if (xValueL > 600 && yValueL < 400) {
+        Mouse.move(move_mouse, move_mouse);
+        delay(time);
+    }
+    if (xValueL > 600 && yValueL > 600) {
+        Mouse.move(move_mouse, -move_mouse);
+        delay(time);
+    }
+
+    if (Button_RA == 0) {
+        Keyboard.write(R_A);
+        delay(time_click);
+    }
+    if (Button_RB == 0) {
+        Keyboard.write(R_B);
+        delay(time_click);
+    }
+    if (Button_RC == 0) {
+        Keyboard.write(R_C);
+        delay(time_click);
+    }
+    if (Button_RD == 0) {
+        Keyboard.write(R_D);
+        delay(time_click);
+    }
+    if (Button_RA == 0) {
+        Keyboard.write(R_A);
+        delay(time_click);
+    }
+    if (Button_LA == 0) {
+        Mouse.click(MOUSE_RIGHT);
+        // Keyboard.write(L_A);
+        delay(time_click);
+    }
+    if (Button_LB == 0) {
+        Mouse.click(MOUSE_LEFT);
+        // Keyboard.write(L_B);
+        delay(time_click);
+    }
+    if (Button_LC == 0) {
+        Keyboard.write(L_C);
+        delay(time_click);
+    }
+    if (Button_LD == 0) {
+        Keyboard.write(L_D);
+        delay(time_click);
+    }
+}
+                    </code>
+                </pre>
+            </div>
+            <div id="demo" class="tab-content hidden p-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Demo Video</h2>
+                <div class="aspect-w-16 aspect-h-9 max-w-2xl mx-auto">
+                    <video controls class="rounded-lg w-full h-full object-cover">
+                        <source src="/placeholder.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+            <div class="p-6 border-t border-gray-700">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 text-sm text-gray-400">
+                    <div>นายกอบชนม์ เหง้าศรี 66070010</div>
+                    <div>นายณฐนนท์ ส่องสกาวฟ้า 66070057</div>
+                    <div>นายธันยา วรมงคล 66070091</div>
+                    <div>นายณัฐปภัสร์ อัครเกษมพัฒน์ 66070258</div>
+                </div>
+            </div>
+        </div>
     </div>
-    <br>
-    <div class="m-5 p-5">
-        <h1 class="text-center text-2xl">แก้ปัญหาคนอยากเล่นเกมโดยใช้ joy controller บน PC สำหรับบางเกมนั้นการเล่นด้วย joy controller มันทั้งสะดวกกว่า และได้รับประสบการณ์การเล่นที่ดีกว่าการใช้คีย์บอร์ดและเมาส์ โดยในแต่ละเกมเองก็มีการใช้ปุ่มที่แตกต่างกัน จึงให้ผู้เล่นสามารถตั้งค่าแต่ละปุ่มได้ ตามที่ผู้เล่นต้องการได้</h1>
-    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabs = document.querySelectorAll('.tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.getAttribute('data-tab');
+                    
+                    tabs.forEach(t => {
+                        t.classList.remove('active', 'bg-gray-800', 'text-white');
+                        t.classList.add('text-gray-400');
+                    });
+                    tabContents.forEach(content => content.classList.add('hidden'));
+                    
+                    tab.classList.add('active', 'bg-gray-800', 'text-white');
+                    tab.classList.remove('text-gray-400');
+                    document.getElementById(tabId).classList.remove('hidden');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
