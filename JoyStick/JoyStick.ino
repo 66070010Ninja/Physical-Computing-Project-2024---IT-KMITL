@@ -25,13 +25,13 @@ const char Right = 'd';
 
 const char R_A = 'e';
 const char R_B = 'f';
-const char R_C = 'q';
-const char R_D = 'c';
+const char R_C = KEY_ESC;
+const char R_D = 'm';
 
 const char L_A = 'l';
 const char L_B = 'k';
 const char L_C = 'b';
-const char L_D = 't';
+const char L_D = 'f';
 
 // Button
 const int B_RA = 2;
