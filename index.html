@@ -217,10 +217,14 @@ void loop() {
             <div id="video" class="tab-content hidden p-6">
                 <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Video</h2>
                 <div class="aspect-w-16 aspect-h-9 max-w-2xl mx-auto">
-                    <video controls class="rounded-lg w-full h-full object-cover">
-                        <source src="/placeholder.mp4" type="video/mp4">
-                        Your browser does not support the video tag.
-                    </video>
+                    <iframe
+                        src="https://www.youtube.com/embed/RxntoACltsk"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                        class="w-full h-96 rounded-lg"
+                    ></iframe>
                 </div>
             </div>
             <div class="p-6 border-t border-gray-700">

@@ -617,12 +617,12 @@ video {
   height: 100%;
 }
 
-.max-h-48 {
-  max-height: 12rem;
+.h-72 {
+  height: 18rem;
 }
 
-.max-h-96 {
-  max-height: 24rem;
+.h-96 {
+  height: 24rem;
 }
 
 .max-h-72 {
