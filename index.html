@@ -11,14 +11,14 @@
     <div class="container mx-auto max-w-4xl p-4 sm:p-6 lg:p-8">
         <div class="bg-gray-800 rounded-lg overflow-hidden shadow-xl">
             <div class="p-6">
-                <img src="JoyCon Poster.png" alt="JoyCon Project Logo" class="max-h-48 mx-auto object-contain">
+                <img src="Logo.png" alt="JoyCon Project Logo" class="max-h-72 mx-auto object-contain">
             </div>
             <div class="flex bg-gray-700 border-b border-gray-600">
-                <button class="tab active px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="abstract">บทคัดย่อ</button>
+                <button class="tab active px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="about">About Project</button>
                 <button class="tab px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="code">Source Code</button>
-                <button class="tab px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="demo">Demo</button>
+                <button class="tab px-4 py-2 text-sm sm:text-base font-medium focus:outline-none" data-tab="video">Video</button>
             </div>
-            <div id="abstract" class="tab-content active p-6">
+            <div id="about" class="tab-content active p-6">
                 <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">บทคัดย่อ</h2>
                 <p class="text-gray-300 leading-relaxed mb-8">ในปัจจุบันมีการออกแบบจอยคอนโทรลเลอร์หลายประเภทให้ผู้ใช้เลือกตามความต้องการ เช่น จอยคอนโทรลเลอร์ PlayStation, Xbox และจอยคอนโทรลเลอร์สำหรับเกมเฉพาะต่างๆ โครงการนี้มีวัตถุประสงค์ในการสร้างจอยคอนโทรลเลอร์ที่ปรับให้เหมาะกับการเล่นเกมหรือการใช้งานตามความถนัดของผู้ใช้แต่ละราย รวมถึงศึกษาและเข้าใจหลักการทำงานของจอยคอนโทรลเลอร์เพื่อให้สามารถนำไปประยุกต์ใช้ได้ในลักษณะที่เหมาะสมกับผู้ใช้งานแต่ละคน</p>
                 <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">คำนำ</h2>
@@ -54,13 +54,13 @@ const char Right = 'd';
 
 const char R_A = 'e';
 const char R_B = 'f';
-const char R_C = 'q';
-const char R_D = 'c';
+const char R_C = KEY_ESC;
+const char R_D = 'm';
 
 const char L_A = 'l';
 const char L_B = 'k';
 const char L_C = 'b';
-const char L_D = 't';
+const char L_D = 'f';
 
 // Button
 const int B_RA = 2;
@@ -214,8 +214,8 @@ void loop() {
                     </code>
                 </pre>
             </div>
-            <div id="demo" class="tab-content hidden p-6">
-                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Demo Video</h2>
+            <div id="video" class="tab-content hidden p-6">
+                <h2 class="text-2xl sm:text-3xl font-bold text-center mb-6 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Video</h2>
                 <div class="aspect-w-16 aspect-h-9 max-w-2xl mx-auto">
                     <video controls class="rounded-lg w-full h-full object-cover">
                         <source src="/placeholder.mp4" type="video/mp4">
@@ -237,17 +237,14 @@ void loop() {
         document.addEventListener('DOMContentLoaded', function() {
             const tabs = document.querySelectorAll('.tab');
             const tabContents = document.querySelectorAll('.tab-content');
-
             tabs.forEach(tab => {
                 tab.addEventListener('click', () => {
                     const tabId = tab.getAttribute('data-tab');
-                    
                     tabs.forEach(t => {
                         t.classList.remove('active', 'bg-gray-800', 'text-white');
                         t.classList.add('text-gray-400');
                     });
                     tabContents.forEach(content => content.classList.add('hidden'));
-                    
                     tab.classList.add('active', 'bg-gray-800', 'text-white');
                     tab.classList.remove('text-gray-400');
                     document.getElementById(tabId).classList.remove('hidden');
