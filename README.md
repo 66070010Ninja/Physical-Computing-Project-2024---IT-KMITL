@@ -23,3 +23,6 @@ Project Computing Project 2024 - ITKMITL
 รองศาสตราจารย์ ดร. ปานวิทย์ ธุวะนุติ
 
 อาจารย์ประจำคณะเทคโนโลยีสารสนเทศ สถาบันเทคโนโลยีพระจอมเกล้าเจ้าคุณทหารลาดกระบัง
+
+## link youtube
+https://youtu.be/RxntoACltsk
